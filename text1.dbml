@@ -1,0 +1,59 @@
+table registro {
+    id serial [pk]
+    nombre varchar 
+    apellido varchar
+    genero varchar
+    email varchar
+    opciones_pago varchar
+    avatar varchar
+    contrasna varchar
+}
+
+
+table metodo_pago {
+    id serial [pk]
+    tipo_de_banco varchar
+    numero_tarjeta int
+    cvv int
+    clave_dinamica int
+    verificar_pago varchar
+}
+
+table finalizacion_metodo_pago {
+    exitoso text
+    rechazado text
+}
+
+table inicio {
+    id serial [pk]
+    email varchar
+    contrasna varchar
+}
+
+table perfil {
+   id serial [pk]
+   username varchar
+   correo varchar
+   avatar varchar
+   categoria varchar
+}
+
+table categoria {
+    accion varchar
+    aventura varchar
+    terror varchar
+    comedia varchar
+    drama varchar
+    ciencia_ficcion varchar
+    fantasia varchar
+    misterio varchar
+    romance varchar
+    musical varchar
+    documental varchar
+    
+}    
+Ref: registro.opciones_pago > metodo_pago.id
+ref: finalizacion_metodo_pago.rechazado > metodo_pago.tipo_de_banco
+Ref: finalizacion_metodo_pago.exitoso > inicio.id
+Ref: metodo_pago.verificar_pago > finalizacion_metodo_pago.exitoso
+Ref: metodo_pago.verificar_pago > finalizacion_metodo_pago.rechazado
