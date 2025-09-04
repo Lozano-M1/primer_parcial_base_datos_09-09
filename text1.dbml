@@ -4,94 +4,94 @@ Table Users {
     email varchar
     contrasena varchar(10)
 }
-Table planes {
-  id_planes   int
+Table Planes {
+  id_Planes   int
   nombre      varchar
   precio_usd  decimal
 }
-Table suscripciones {
-  id_suscripciones  int
-  usuario_id  int
-  plan_id     int
-  fecha_inicio date
-  fecha_fin   date
+Table Suscripciones {
+  id_Suscripciones  int
+  Usuario_id  int
+  Plan_id     int
+  Fecha_inicio date
+  Fecha_fin   date
 }
-Table pagos {
-  id_pagos          int
-  suscripcion_id int
+Table Pagos {
+  id_Pagos       int
+  Suscripcion_id int
   monto_usd   decimal
   estado      varchar
   pagado_en   timestamp
 }
-Table estado_p {
-    id_estado_p  int
-    completado varchar
-    fallido varchar
+Table EstadoPago {
+    id_EstadoPago  int
+    Completado varchar
+    Fallido varchar
 }
-Table perfiles {
-  id_perfiles         int
-  usuario_id  int
-  nombre      varchar
-  edad        int
-  idioma      varchar
-  historial   varchar
+Table Perfiles {
+  id_Perfiles         int
+  Usuario_id  int
+  Nombre      varchar
+  Edad        int
+  Idioma      varchar
+  Historial   varchar
 
 }
-Table titulos {
-  id_titulos          int
-  nombre      varchar
-  tipo        varchar   // película o serie
-  generos varchar
-  sinopsis    text
-  ano_estreno int
+Table Titulos {
+  id_Titulos          int
+  Nombre      varchar
+  Tipo       varchar   // película o serie
+  Generos varchar
+  Sinopsis    text
+  Ano_estreno int
 }
-Table tipos {
-    id_tipos  int
-    peliculas varchar
-    series varchar
+Table Tipos {
+    id_Tipos  int
+    Peliculas varchar
+    Series varchar
 }
-Table peliculas {
-    id_peliculas int 
-    nombre varchar
-    generos varchar
-    duracion time
+Table Peliculas {
+    id_Peliculas int
+    Nombre varchar
+    Generos varchar
+    Duracion time
 }
-Table serie {
-  id_serie        int
-  titulo_id   int
-  temporada   int
-  numero      int
-  nombre      varchar
-  generos varchar
+Table Serie {
+  id_Serie        int
+  Titulo_id   int
+  Temporada   int
+  Numero      int
+  Nombre      varchar
+  Generos    varchar
 }
-Table generos {
-  id_generos int
-  terror   varchar
-  accion  varchar
-  romance varchar
-  anime varchar
-  risa varchar
-  documentales varchar
+Table Generos {
+  id_Generos int
+  Terror   varchar
+  Accion   varchar
+  Romance varchar
+  Anime varchar
+  Risa varchar
+  Documentales varchar
 }
-Table historial {
-  id_historial          int
-  titulo_id   int
-  episodio_id int
-  visto_en   varchar
+Table Historial {
+  id_Historial          int
+  Titulo_id   int
+  Episodio_id int
+  Visto_en   varchar
 }
 
-Ref: Users.id_Users < planes.id_planes
-Ref: planes.id_planes < suscripciones.id_suscripciones
-Ref: suscripciones.id_suscripciones < pagos.id_pagos
-Ref: pagos.estado < estado_p.id_estado_p
-Ref: estado_p.fallido < pagos.id_pagos
-ref: estado_p.completado < perfiles.id_perfiles
-Ref: perfiles.id_perfiles < titulos.id_titulos
-ref: titulos.tipo < tipos.id_tipos
-Ref: tipos.peliculas < peliculas.id_peliculas
-Ref: tipos.series < serie.id_serie
-Ref: titulos.generos < generos.id_generos
-Ref: peliculas.generos < generos.id_generos
-Ref: serie.generos < generos.id_generos
-Ref: generos.id_generos < historial.id_historial
-Ref: perfiles.historial < historial.id_historial
+Ref: Users.id_Users < Planes.id_Planes
+Ref: Planes.id_Planes < Suscripciones.id_Suscripciones
+Ref: Suscripciones.id_Suscripciones < Pagos.id_Pagos
+Ref: Pagos.estado < EstadoPago.id_EstadoPago
+Ref: EstadoPago.fallido < Pagos.id_Pagos
+Ref: EstadoPago.Completado < Perfiles.id_Perfiles
+Ref: Perfiles.id_Perfiles < Titulos.id_Titulos
+Ref: Titulos.id_Titulos < Tipos.id_Tipos
+Ref: Tipos.id_Tipos < Peliculas.id_Peliculas
+Ref: Tipos.id_Tipos < Serie.id_Serie
+Ref: Titulos.id_Titulos < Generos.id_Generos
+Ref: Peliculas.id_Peliculas < Generos.id_Generos
+Ref: Serie.id_Serie < Generos.id_Generos
+Ref: Generos.id_Generos < Historial.id_Historial
+Ref: Perfiles.id_Perfiles < Historial.id_Historial
