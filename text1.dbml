@@ -12,7 +12,7 @@ Table Planes {
 Table Suscripciones {
   id_suscripciones  int
   usuario_id  int
-  plan_id     int
+  plan        int
   fecha_inicio date
   fecha_fin   date
 }
@@ -26,7 +26,6 @@ Table Pagos {
 Table EstadoPago {
   id_estado_pago  int
   completado varchar
-  fallido varchar
 }
 Table Perfiles {
   id_perfiles         int
@@ -80,11 +79,10 @@ Table Historial {
   visto_en   varchar
 }
 
-Ref: Users.id_users < Planes.id_planes
-Ref: Planes.id_planes < Suscripciones.id_suscripciones
+Ref: Users.id_users < Planes.nombre_planes
+Ref: Planes.nombre_planes < Suscripciones.plan
 Ref: Suscripciones.id_suscripciones < Pagos.id_pagos
-Ref: Pagos.estado < EstadoPago.id_estado_pago
-Ref: EstadoPago.fallido < Pagos.id_pagos
+Ref: Pagos.plan < EstadoPago.completado
 Ref: EstadoPago.completado < Perfiles.id_perfiles
 Ref: Perfiles.id_perfiles < Titulos.id_titulos
 Ref: Titulos.id_titulos < Tipos.id_tipos
@@ -94,4 +92,3 @@ Ref: Titulos.id_titulos < Generos.id_generos
 Ref: Peliculas.id_peliculas < Generos.id_generos
 Ref: Serie.id_serie < Generos.id_generos
 Ref: Generos.id_generos < Historial.id_historial
-Ref: Perfiles.id_perfiles < Historial.id_historial
