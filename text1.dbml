@@ -1,59 +1,97 @@
-table registro {
-    id serial [pk]
-    nombre varchar 
-    apellido varchar
-    genero varchar
+Table Users {
+    id_Users serial [pk]
+    username varchar [unique]
     email varchar
-    opciones_pago varchar
-    avatar varchar
-    contrasna varchar
+    contrasena varchar(10)
+}
+Table planes {
+  id_planes   int
+  nombre      varchar
+  precio_usd  decimal
+}
+Table suscripciones {
+  id_suscripciones  int
+  usuario_id  int
+  plan_id     int
+  fecha_inicio date
+  fecha_fin   date
+}
+Table pagos {
+  id_pagos          int
+  suscripcion_id int
+  monto_usd   decimal
+  estado      varchar
+  pagado_en   timestamp
+}
+Table estado_p {
+    id_estado_p  int
+    completado varchar
+    fallido varchar
+}
+Table perfiles {
+  id_perfiles         int
+  usuario_id  int
+  nombre      varchar
+  edad        int
+  idioma      varchar
+  historial   varchar
+
+}
+Table titulos {
+  id_titulos          int
+  nombre      varchar
+  tipo        varchar   // película o serie
+  generos varchar
+  sinopsis    text
+  ano_estreno int
+}
+Table tipos {
+    id_tipos  int
+    peliculas varchar
+    series varchar
+}
+Table peliculas {
+    id_peliculas int 
+    nombre varchar
+    generos varchar
+    duracion time
+}
+Table serie {
+  id_serie        int
+  titulo_id   int
+  temporada   int
+  numero      int
+  nombre      varchar
+  generos varchar
+}
+Table generos {
+  id_generos int
+  terror   varchar
+  accion  varchar
+  romance varchar
+  anime varchar
+  risa varchar
+  documentales varchar
+}
+Table historial {
+  id_historial          int
+  titulo_id   int
+  episodio_id int
+  visto_en   varchar
 }
 
-
-table metodo_pago {
-    id serial [pk]
-    tipo_de_banco varchar
-    numero_tarjeta int
-    cvv int
-    clave_dinamica int
-    verificar_pago varchar
-}
-
-table finalizacion_metodo_pago {
-    exitoso text
-    rechazado text
-}
-
-table inicio {
-    id serial [pk]
-    email varchar
-    contrasna varchar
-}
-
-table perfil {
-   id serial [pk]
-   username varchar
-   correo varchar
-   avatar varchar
-   categoria varchar
-}
-
-table categoria {
-    accion varchar
-    aventura varchar
-    terror varchar
-    comedia varchar
-    drama varchar
-    ciencia_ficcion varchar
-    fantasia varchar
-    misterio varchar
-    romance varchar
-    musical varchar
-    documental varchar
-    
-}    
-Ref: registro.opciones_pago > metodo_pago.id
-ref: finalizacion_metodo_pago.rechazado > metodo_pago.tipo_de_banco
-Ref: finalizacion_metodo_pago.exitoso > inicio.id
-Ref: metodo_pago.verificar_pago > finalizacion_metodo_pago.exitoso
-Ref: metodo_pago.verificar_pago > finalizacion_metodo_pago.rechazado
+Ref: Users.id_Users < planes.id_planes
+Ref: planes.id_planes < suscripciones.id_suscripciones
+Ref: suscripciones.id_suscripciones < pagos.id_pagos
+Ref: pagos.estado < estado_p.id_estado_p
+Ref: estado_p.fallido < pagos.id_pagos
+ref: estado_p.completado < perfiles.id_perfiles
+Ref: perfiles.id_perfiles < titulos.id_titulos
+ref: titulos.tipo < tipos.id_tipos
+Ref: tipos.peliculas < peliculas.id_peliculas
+Ref: tipos.series < serie.id_serie
+Ref: titulos.generos < generos.id_generos
+Ref: peliculas.generos < generos.id_generos
+Ref: serie.generos < generos.id_generos
+Ref: generos.id_generos < historial.id_historial
+Ref: perfiles.historial < historial.id_historial
