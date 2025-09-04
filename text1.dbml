@@ -6,7 +6,7 @@ Table Users {
 }
 Table Planes {
   id_planes   int
-  nombre      varchar
+  nombre_planes varchar
   precio_usd  decimal
 }
 Table Suscripciones {
@@ -31,7 +31,7 @@ Table EstadoPago {
 Table Perfiles {
   id_perfiles         int
   usuario_id  int
-  nombre      varchar
+  nombre_perfil      varchar
   edad        int
   idioma      varchar
   historial   varchar
@@ -39,7 +39,7 @@ Table Perfiles {
 }
 Table Titulos {
   id_titulos          int
-  nombre              varchar
+  nombre_titulo       varchar
   tipo                varchar   // película o serie
   generos             varchar
   sinopsis            text
