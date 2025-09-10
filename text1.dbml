@@ -6,19 +6,20 @@ Table Users {
 }
 Table Planes {
   id_planes   int
+  id_users_planes int
   nombre_planes varchar
   precio_usd  decimal
 }
 Table Suscripciones {
   id_suscripciones  int
-  usuario_id  int
+  usuario  int
   plan        int
   fecha_inicio date
   fecha_fin   date
 }
 Table Pagos {
   id_pagos       int
-  suscripcion_id int
+  suscripcion_hd int
   monto_usd   decimal
   estado      varchar
   pagado_en   timestamp
@@ -29,14 +30,15 @@ Table EstadoPago {
 }
 Table Perfiles {
   id_perfiles         int
-  usuario_id  int
+  usuario  int
   nombre_perfil      varchar
+  programas     varchar
   edad        int
   idioma      varchar
   historial   varchar
 
 }
-Table Titulos {
+Table Busqueda {
   id_titulos          int
   nombre_titulo       varchar
   tipo                varchar   // película o serie
@@ -46,25 +48,14 @@ Table Titulos {
 }
 Table Tipos {
   id_tipos  int
+  tipo_d_programa varchar
   peliculas varchar
   series    varchar
 }
-Table Peliculas {
-  id_peliculas int
-  nombre      varchar
-  generos    varchar
-  duracion   time
-}
-Table Serie {
-  id_serie        int
-  titulo_id      int
-  temporada       int
-  numero          int
-  nombre          varchar
-  generos        varchar
-}
+
 Table Generos {
   id_generos int
+  busqueda_d_genero int
   terror   varchar
   accion   varchar
   romance varchar
@@ -74,21 +65,17 @@ Table Generos {
 }
 Table Historial {
   id_historial          int
-  titulo_id   int
-  episodio_id int
+  titulo   int
+  episodio   int
   visto_en   varchar
 }
 
-Ref: Users.id_users < Planes.nombre_planes
-Ref: Planes.nombre_planes < Suscripciones.plan
-Ref: Suscripciones.id_suscripciones < Pagos.id_pagos
-Ref: Pagos.plan < EstadoPago.completado
-Ref: EstadoPago.completado < Perfiles.id_perfiles
-Ref: Perfiles.id_perfiles < Titulos.id_titulos
-Ref: Titulos.id_titulos < Tipos.id_tipos
-Ref: Tipos.id_tipos < Peliculas.id_peliculas
-Ref: Tipos.id_tipos < Serie.id_serie
-Ref: Titulos.id_titulos < Generos.id_generos
-Ref: Peliculas.id_peliculas < Generos.id_generos
-Ref: Serie.id_serie < Generos.id_generos
-Ref: Generos.id_generos < Historial.id_historial
+Ref: Users.id_users < Planes.id_users_planes
+Ref: Users.username < Perfiles.usuario
+Ref: Planes.precio_usd < Suscripciones.plan
+Ref: Suscripciones.usuario < Pagos.suscripcion_hd
+Ref: Pagos.estado < EstadoPago.completado
+Ref: Perfiles.programas < Busqueda.nombre_titulo
+Ref: Busqueda.tipo < Tipos.tipo_d_programa
+Ref: Busqueda.generos < Generos.busqueda_d_genero
+Ref: Perfiles.historial < Historial.titulo
