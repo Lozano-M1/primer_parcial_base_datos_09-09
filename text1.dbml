@@ -5,57 +5,56 @@ Table Users {
   contrasena varchar(10)
 }
 Table Planes {
-  id_planes   int
+id_planes    serial [pk]
   id_users_planes int
   nombre_planes varchar
   precio_usd  decimal
 }
 Table Suscripciones {
-  id_suscripciones  int
-  usuario  int
-  plan        int
-  fecha_inicio date
-  fecha_fin   date
+  id_suscripciones  serial [pk]
+  usuario  varchar
+  plan        text
+  fecha_inicio int
+  fecha_fin    int
 }
 Table Pagos {
-  id_pagos       int
-  suscripcion_hd int
+  id_pagos       serial [pk]
+  suscripcion_hd varchar
   monto_usd   decimal
   estado      varchar
-  pagado_en   timestamp
+  pagado      varchar
 }
 Table EstadoPago {
-  id_estado_pago  int
+  id_estado_pago  serial [pk]
   completado varchar
 }
 Table Perfiles {
-  id_perfiles         int
-  usuario  int
-  nombre_perfil      varchar
-  programas     varchar
-  edad        int
-  idioma      varchar
-  historial   varchar
+  id_perfiles       serial [pk]
+  usuario           varchar
+  programas         text
+  edad              int
+  idioma            varchar
+  historial         text
 
 }
 Table Busqueda {
-  id_titulos          int
-  nombre_titulo       varchar
-  tipo                varchar   // película o serie
-  generos             varchar
+  id_busqueda         serial [pk]
+  nombre_titulo       text
+  tipo                text
+  generos             text
   sinopsis            text
   ano_estreno         int
 }
 Table Tipos {
-  id_tipos  int
+  id_tipos  serial [pk]
   tipo_d_programa varchar
-  peliculas varchar
-  series    varchar
+  peliculas text
+  series    text
 }
 
 Table Generos {
-  id_generos int
-  busqueda_d_genero int
+  id_generos serial [pk]
+  busqueda_d_genero varchar
   terror   varchar
   accion   varchar
   romance varchar
@@ -64,10 +63,10 @@ Table Generos {
   documentales varchar
 }
 Table Historial {
-  id_historial          int
-  titulo   int
-  episodio   int
-  visto_en   varchar
+  id_historial    serial [pk]
+  titulo         varchar
+  episodio       varchar
+  visto_en       varchar
 }
 
 Ref: Users.id_users < Planes.id_users_planes
